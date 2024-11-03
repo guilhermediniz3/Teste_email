@@ -1,0 +1,17 @@
+{
+    "name": "55319/luciana_mameri_boot",
+    "autoload": {
+        "psr-4": {
+            "55319\\LucianaMameriBoot\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "guilhermediniz3",
+            "email": "gdiniztec@yahoo.com.br"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^6.9"
+    }
+}

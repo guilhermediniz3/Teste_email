@@ -31,8 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'message' => htmlspecialchars($_POST['message']),
                 'configuration' => 'Padrão',
                 'smtp' => 'smtp.gmail.com',
-                'email' => 'guilhermeaquario@gmail.com',
-                'password' => 'nhphgavncksrswtn', // Senha padrão
+                'email' => 'seu email padrao',
+                'password' => 'sua senha de app', // Senha padrão
                 'port' => 465,
             ]);
             echo '</pre>';

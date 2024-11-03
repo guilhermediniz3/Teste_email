@@ -17,11 +17,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com'; // Seu servidor SMTP padrão
             $mail->SMTPAuth = true;
-            $mail->Username = 'guilhermeaquario@gmail.com'; // Seu e-mail padrão
-            $mail->Password = 'nhphgavncksrswtn'; // Sua senha padrão
+            $mail->Username = 'informe aqui o email padrao'; // Seu e-mail padrão
+            $mail->Password = 'informe aqui a senha de app'; // Sua senha padrão
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
             $mail->Port = 465;
-            $mail->setFrom('guilhermeaquario@gmail.com', 'Configuração Padrão'); // Seu e-mail padrão
+            $mail->setFrom('informar aqui o email padrão para receber, 'Configuração Padrão'); // Seu e-mail padrão
             
             // Exibe as informações padrão
             echo '<pre>';
@@ -50,8 +50,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $mail->SMTPAuth = true;
                 $mail->Username = htmlspecialchars($_POST['email']);
                 $mail->Password = htmlspecialchars($_POST['password']);
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-                $mail->Port = (int) htmlspecialchars($_POST['port']);
+                
+                // Verifica a porta e define o tipo de criptografia
+                $port = (int) htmlspecialchars($_POST['port']);
+                $mail->Port = $port;
+
+                if ($port === 587) {
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Para porta 587
+                } else {
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // Para porta 465
+                }
+
                 $mail->setFrom(htmlspecialchars($_POST['email']), 'Configurações de E-mail');
 
                 // Exibe as informações do modal
@@ -64,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'smtp' => htmlspecialchars($_POST['smtp']),
                     'email' => htmlspecialchars($_POST['email']),
                     'password' => htmlspecialchars($_POST['password']),
-                    'port' => (int) htmlspecialchars($_POST['port']),
+                    'port' => $port,
                 ]);
                 echo '</pre>';
 
